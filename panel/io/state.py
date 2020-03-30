@@ -54,6 +54,9 @@ class _state(param.Parameterized):
     # Stores a set of locked Websockets, reset after every change event
     _locks = WeakSet()
 
+    # Endpoints
+    _rest_endpoints = {}
+
     def __repr__(self):
         server_info = []
         for server, panel, docs in self._servers.values():
@@ -77,6 +80,11 @@ class _state(param.Parameterized):
         thread = threading.current_thread()
         thread_id = thread.ident if thread else None
         return (doc is self.curdoc and self._thread_id == thread_id)
+
+    def publish(self, endpoint, parameterized, input=None, output=None):
+        if output is None:
+            output = list(parameterized.param)
+        self._rest_endpoints[(self.curdoc, endpoint)] = (parameterized, input, output)
 
     @property
     def curdoc(self):
