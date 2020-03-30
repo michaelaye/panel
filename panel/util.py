@@ -12,6 +12,7 @@ import sys
 
 from collections import defaultdict, OrderedDict
 from datetime import datetime
+from distutils.version import LooseVersion
 from six import string_types
 
 try:  # python >= 3.3
@@ -24,6 +25,7 @@ try:
 except Exception:
     from xml.sax.saxutils import quoteattr
 
+import bokeh
 import param
 import numpy as np
 
@@ -32,6 +34,7 @@ datetime_types = (np.datetime64, dt.datetime, dt.date)
 if sys.version_info.major > 2:
     unicode = str
 
+bokeh_version = LooseVersion(bokeh.__version__)
 
 html_escape_table = {
     '"': "&quot;",

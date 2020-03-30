@@ -199,7 +199,7 @@ setup_args = dict(
     python_requires=">=2.7",
     entry_points={
         'console_scripts': [
-            'panel = panel.cli:main'
+            'panel = panel.command:main'
         ]},
     install_requires=install_requires,
     extras_require=extras_require,
